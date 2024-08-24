@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('se.jpg');
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: antiquewhite;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 50px;
+        }
+
+        form {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-size: 18px;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Simulate login logic
+            alert("Login successful! Redirecting to dashboard...");
+
+            // Redirect to the dashboard page
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

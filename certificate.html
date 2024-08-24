@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: skyblue;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .certificate-box {
+            background-color: #fff;
+            background-image: url('certi.jpg'); /* Ensure 'certi.jpg' is in the correct path */
+            background-size: cover;
+            border: 4px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            width: 80%;
+            min-height: 82vh; /* Minimum height to cover most of the viewport height */
+            margin: 20px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .certificate-header {
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid black;
+        }
+
+        .certificate-header h1 {
+            color: darkblue;
+            margin: 0;
+            font-style: italic;
+            font-size: 45px;
+        }
+
+        .certificate-content {
+            margin-top: 30px;
+        }
+
+        .certificate-content h2 {
+            font-size: 26px;
+            font-style: italic;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .certificate-content p {
+            font-size: 27px;
+            color: black;
+        }
+
+        button {
+            background-color: #4CAF50; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Button hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-box">
+        <div class="certificate-header">
+            <h1>Certificate of Completion</h1>
+        </div>
+        <div class="certificate-content">
+            <h2>This certificate is awarded to</h2><br>
+            <h2><u id="userName">[Name]</u></h2><br><br>
+            <p><b>For successfully completing the course and exceptional performance in the Quiz</b></p>
+            <p id="certificateText"></p>
+        </div>
+    </div>
+    <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+
+    <script>
+        // Function to get the name from localStorage or sessionStorage
+        function getUserName() {
+            return localStorage.getItem('userName') || 'Divyanshi Pundir';
+        }
+
+        // Display the user name on the certificate
+        document.getElementById('userName').textContent = getUserName();
+    </script>
+</body>
+</html>

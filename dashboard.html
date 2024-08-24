@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('download.jpg');
+            background-size: cover;
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40px;
+            color: #333;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Ensures 3 blocks per row */
+            gap: 30px; /* Increased space between blocks */
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .course-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 5px solid skyblue;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+            text-align: center;
+        }
+
+        .course-item:hover {
+            background-color: #e7f3ff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 25px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            text-align: center;
+            line-height: 20px;
+            color: black;
+            border-radius: 10px;
+        }
+
+        .quiz-button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-button:hover {
+            background-color: #ff5a4d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dashboard</h1><br><br>
+    <div class="course-grid" id="courseList">
+        <!-- Courses will be dynamically loaded here -->
+    </div>
+
+    <script>
+        const courses = [
+            { name: "C Programming", url: "https://www.geeksforgeeks.org/c-programming-language/" },
+            { name: "C++ Programming", url: "https://www.geeksforgeeks.org/c-plus-plus/" },
+            { name: "Java Programming", url: "https://www.geeksforgeeks.org/java/" },
+            { name: "HTML", url: "https://www.geeksforgeeks.org/html/" },
+            { name: "CSS", url: "https://www.geeksforgeeks.org/css/" },
+            { name: "Python Programming", url: "https://www.geeksforgeeks.org/python-programming-language/" }
+        ];
+
+        const courseList = document.getElementById('courseList');
+
+        // Load progress from localStorage
+        courses.forEach(course => {
+            const listItem = document.createElement('div');
+            listItem.className = 'course-item';
+
+            const link = document.createElement('a');
+            link.href = course.url;
+            link.textContent = course.name;
+            link.target = "_blank";  // Open in a new tab
+            link.addEventListener('click', () => {
+                updateProgress(course.name, 50); // Update to 50% on click
+            });
+
+            const progressBarContainer = document.createElement('div');
+            progressBarContainer.className = 'progress-bar';
+
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress';
+            progressBar.textContent = '0%';
+
+            const progress = localStorage.getItem(course.name) || 0;
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+
+            progressBarContainer.appendChild(progressBar);
+
+            const quizButton = document.createElement('button');
+            quizButton.className = 'quiz-button';
+            quizButton.textContent = 'Take Quiz';
+            quizButton.addEventListener('click', () => {
+                completeQuiz(course.name); // Update to 100% on quiz completion
+                window.location.href = 'quiz.html';
+            });
+
+            listItem.appendChild(link);
+            listItem.appendChild(progressBarContainer);
+            listItem.appendChild(quizButton);
+            courseList.appendChild(listItem);
+        });
+
+        function updateProgress(courseName, percent) {
+            let progress = localStorage.getItem(courseName) || 0;
+            if (progress < percent) {
+                localStorage.setItem(courseName, percent);
+                document.querySelector(`.course-item:has(a[href="${courses.find(c => c.name === courseName).url}"]) .progress`).style.width = percent + '%';
+                document.querySelector(`.course-item:has(a[href="${courses.find(c => c.name === courseName).url}"]) .progress`).textContent = percent + '%';
+            }
+        }
+
+        function completeQuiz(courseName) {
+            updateProgress(courseName, 100); // Update to 100% after quiz completion
+        }
+    </script>
+</body>
+</html>
